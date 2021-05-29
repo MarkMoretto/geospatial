@@ -8,20 +8,29 @@
 ### Python binary wheel links:
 
 `--extra-index-url https://download.lfd.uci.edu/pythonlibs/q4trcu4l/`
-
 `--no-index`
 `--no-deps`
 `--find-links https://www.lfd.uci.edu/~gohlke/pythonlibs/`
 
 
-[pyproj](https://download.lfd.uci.edu/pythonlibs/q4trcu4l/pyproj-3.1.0-cp38-cp38-win_amd64.whl)
-[GDAL](https://download.lfd.uci.edu/pythonlibs/q4trcu4l/GDAL-3.3.0-cp38-cp38-win_amd64.whl)
-[Fiona](https://download.lfd.uci.edu/pythonlibs/q4trcu4l/Fiona‑1.8.19‑cp38‑cp38‑win_amd64.whl)
-[Shapely](https://download.lfd.uci.edu/pythonlibs/q4trcu4l/Shapely‑1.7.1‑cp38‑cp38‑win_amd64.whl)
+```text
+# -*- coding: utf-8 -*-
 
-GDAL
-fiona
-shapely
-geopandas
+### GDAL
+https://download.lfd.uci.edu/pythonlibs/q4trcu4l/GDAL-3.2.3-cp37-cp37m-win_amd64.whl
 
---find-links https://www.lfd.uci.edu/~gohlke/pythonlibs/#fiona
+### PyProj
+https://download.lfd.uci.edu/pythonlibs/q4trcu4l/pyproj-3.1.0-cp37-cp37m-win_amd64.whl
+
+### Fiona
+https://download.lfd.uci.edu/pythonlibs/q4trcu4l/Fiona-1.8.19-cp37-cp37m-win_amd64.whl
+
+### Shapely
+https://download.lfd.uci.edu/pythonlibs/q4trcu4l/Shapely-1.7.1-cp37-cp37m-win_amd64.whl
+
+### GeoPandas
+https://download.lfd.uci.edu/pythonlibs/q4trcu4l/geopandas-0.9.0-py3-none-any.whl
+
+numpy
+pandas
+```
