@@ -4,5 +4,5 @@ venv/
 __pycache__/
 
 
-.vsocde/
+.vscode/
 dev[_-]*
