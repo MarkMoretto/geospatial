@@ -1,12 +1,6 @@
-# pyproj
-https://download.lfd.uci.edu/pythonlibs/q4trcu4l/pyproj-3.1.0-cp38-cp38-win_amd64.whl
-
-# GDAL
-https://download.lfd.uci.edu/pythonlibs/q4trcu4l/GDAL-3.3.0-cp38-cp38-win_amd64.whl
-
-# Fiona
-https://download.lfd.uci.edu/pythonlibs/q4trcu4l/Fiona‑1.8.19‑cp38‑cp38‑win_amd64.whl
-
-# Shapely
-https://download.lfd.uci.edu/pythonlibs/q4trcu4l/Shapely‑1.7.1‑cp38‑cp38‑win_amd64.whl
-
+--no-deps
+"https://download.lfd.uci.edu/pythonlibs/q4trcu4l/pyproj-3.1.0-cp38-cp38-win_amd64.whl"
+"https://download.lfd.uci.edu/pythonlibs/q4trcu4l/GDAL-3.3.0-cp38-cp38-win_amd64.whl"
+"https://download.lfd.uci.edu/pythonlibs/q4trcu4l/Fiona-1.8.19-cp38-cp38-win_amd64.whl"
+"https://download.lfd.uci.edu/pythonlibs/q4trcu4l/Shapely-1.7.1-cp38-cp38-win_amd64.whl"
+"https://download.lfd.uci.edu/pythonlibs/q4trcu4l/geopandas-0.9.0-py3-none-any.whl"
