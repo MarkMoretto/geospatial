@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+# geospatial\utility.py
 
 """
 Summary: Various functions for geospatial analysis
@@ -13,11 +16,16 @@ from math import acos, asin, cos, radians, sin, sqrt
 # Local
 from datatypes import Iterable, List, Number, Union
 from constants import EARTH_EQUATORIAL_RADIUS_KM, KM_PER_MI
+from conversion import km_to_mi
 from classes import Coord
 
 ### Third-party
 import numpy as np
+# import numpy.random
+# from numpy import array, float32, int32, concatenate, object_
 
+
+EARTH_EQUATORIAL_RADIUS_MI: float = km_to_mi(EARTH_EQUATORIAL_RADIUS_KM)
 
 
 
@@ -63,6 +71,12 @@ class CoordsValidator:
             self.__set_min_max(coordinates)
 
     def __set_min_max(self, coordinates: List[Coord]):
+        """Set four class variables upon instantiation.
+        
+        Latitude
+        --------
+            min_lat : 
+        """
         self.min_lat, self.max_lat = self.min_max_lat(coordinates)
         self.min_lon, self.max_lon = self.min_max_lon(coordinates)
 
@@ -91,8 +105,30 @@ class CoordsValidator:
 
 
 
-
 def generate_coordinates(lower_left: Coord, upper_right: Coord, n_coords: int = 1000, seed: int = None):
+    """Return numpy.array of random Coord instances for testing.  Generated results will fall within
+    the provided lower-left and upper-right Coord object latitude and longitude values.
+    
+    Parameters
+    ----------
+        lower_left : Coord
+            Coord object containing `start` values, or values in
+            the lower-left portion of the shape.
+        upper_right : Coord
+            Coord object containing `end` values, or values in
+            the upper-right portion of the shape.
+        n_coords : int
+            Number of random Coord objects to generate.
+            Default: 1000.
+        seed : int, optional
+            Seed value for repeatable results from random number generator.
+            Default: None.
+
+    Returns
+    -------
+        numpy.array
+            A numpy array of Coord objects.
+    """
     min_lat= min([lower_left.lat, upper_right.lat])
     max_lat= max([lower_left.lat, upper_right.lat])
     min_lon= min([lower_left.lon, upper_right.lon])
@@ -103,10 +139,19 @@ def generate_coordinates(lower_left: Coord, upper_right: Coord, n_coords: int = 
     if seed:
         lat_arr = rand_range_multidim(n_coords, 1, [min_lat, max_lat], seed)
         lon_arr = rand_range_multidim(n_coords, 1, [min_lon, max_lon], seed)        
-    return [Coord(i[0], i[1]) for i in np.concatenate((lat_arr, lon_arr), axis = 1)]
+    return np.array([Coord(i[0], i[1]) for i in np.concatenate((lat_arr, lon_arr), axis = 1)], dtype = np.object_)
 
 # coords = [Coord(i[0], i[1]) for i in res]
+
+
 def test_coord_validator():
+    """Test: Coordinate resides within a given plane
+    
+    This test looks at rough boundaries of the USA
+    (from San Diego, Calif., to around Fort Kent, Maine)
+    and asks whether a known coordinate falls within that set
+    of dimensions.
+    """
     USA_lower_left = Coord(32.708733, -117.229598)
     USA_upper_right = Coord(47.361153, -68.290845)
     N = 1000
@@ -117,27 +162,55 @@ def test_coord_validator():
     assert (v.coord_in_plane(las_vegas) == True), "Rerun validation test.  Check seed value."
 
 
-X = Coord(37.160316546736745, -78.75)
-y = Coord(39.095962936305476, -121.2890625)
+# X = Coord(37.160316546736745, -78.75)
+# y = Coord(39.095962936305476, -121.2890625)
 # data = np.array(list(ittr.repeat(y, 100)))
 
 
-def shortest_dist_haystack(target: Coord, coords: List[Coord]):
+def shortest_dist_haystack(target: np.array, coords: List[np.array]) -> float:
     """Shortest distance using one-to-many approach."""
-    target_X_rads = radians(target.lat)
-    target_y_rads = radians(target.lon)
+    target_X_rads = radians(target[0])
+    target_y_rads = radians(target[1])
 
-    d_lat = radians(coords[:,0]) - target_x_rads
-    d_lon = radians(coords[:,1]) - target_y_rads 
+    d_lat = np.radians(rand_coords[:,0]) - target_X_rads
+    d_lon = np.radians(rand_coords[:,1]) - target_y_rads
 
-    a = sqrt(sin(d_lat * 0.5)) + cos(target_X_rads) * cos(radians(coords[:,0])) * sqrt(sin(d_lon * 0.5))
+    a = np.square(np.sin(d_lat * 0.5)) + np.cos(target_X_rads) * np.cos(np.radians(rand_coords[:,0])) * np.square(np.sin(d_lon * 0.5))
 
-    great_circle_distance = 2 * asin(min(sqrt(a), np.repeat(1, len(a))))
+    great_circle_distance = 2 * np.arcsin(np.minimum(np.square(a), np.repeat(1, len(a))))
 
-    d = earth_radius_miles * great_circle_distance
+    d = EARTH_EQUATORIAL_RADIUS_MI * great_circle_distance
 
     return np.min(d)
 
+
+def to_value_array(arr_obj):
+    return np.array(list(map(lambda w: w.values(), arr_obj)))
+
+
+def test_haystack():
+    target = np.array([37.160316546736745, -78.75])
+    goal = np.array([39.095962936305476, -121.2890625])
+    USA_lower_left = Coord(32.708733, -117.229598)
+    USA_upper_right = Coord(47.361153, -68.290845)
+
+    rand_coords = generate_coordinates(USA_lower_left, USA_upper_right, 1000)
+    rand_coords = to_value_array(rand_coords)
+    rand_coords = np.append(rand_coords, [goal], axis=0)
+    # rand_coords = np.insert(rand_coords, rand_coords.shape[0], goal, axis=1)
+
+    target_X_rads = radians(target[0])
+    target_y_rads = radians(target[1])
+
+    d_lat = np.radians(rand_coords[:,0]) - target_X_rads
+    d_lon = np.radians(rand_coords[:,1]) - target_y_rads
+
+    a = np.square(np.sin(d_lat * 0.5)) + np.cos(target_X_rads) * np.cos(np.radians(rand_coords[:,0])) * np.square(np.sin(d_lon * 0.5))
+
+    great_circle_distance = 2 * np.arcsin(np.minimum(np.square(a), np.repeat(1, len(a))))
+
+    d = EARTH_EQUATORIAL_RADIUS_MI * great_circle_distance
+    result = np.min(d)
 
 
 if __name__ == "__main__":

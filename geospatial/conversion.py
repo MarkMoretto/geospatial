@@ -5,7 +5,7 @@ Summary: Functions for converting data.
 
 # Local imports
 from datatypes import Number
-from constants import DEGREE
+from constants import DEGREE, KM_PER_MI
 
 
 
