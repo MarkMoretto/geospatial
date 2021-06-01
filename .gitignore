@@ -8,4 +8,4 @@ __pycache__/
 dev[_-]*
 
 /examples/geopandas*pandas.py
-!/examples/data/
+!examples/data/*
