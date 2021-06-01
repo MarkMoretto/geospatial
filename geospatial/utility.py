@@ -15,17 +15,12 @@ from math import acos, asin, cos, radians, sin, sqrt
 
 # Local
 from datatypes import Iterable, List, Number, Union
-from constants import EARTH_EQUATORIAL_RADIUS_KM, KM_PER_MI
-from conversion import km_to_mi
 from classes import Coord
 
 ### Third-party
 import numpy as np
 # import numpy.random
 # from numpy import array, float32, int32, concatenate, object_
-
-
-EARTH_EQUATORIAL_RADIUS_MI: float = km_to_mi(EARTH_EQUATORIAL_RADIUS_KM)
 
 
 
@@ -167,21 +162,6 @@ def test_coord_validator():
 # data = np.array(list(ittr.repeat(y, 100)))
 
 
-def shortest_dist_haystack(target: np.array, coords: List[np.array]) -> float:
-    """Shortest distance using one-to-many approach."""
-    target_X_rads = radians(target[0])
-    target_y_rads = radians(target[1])
-
-    d_lat = np.radians(rand_coords[:,0]) - target_X_rads
-    d_lon = np.radians(rand_coords[:,1]) - target_y_rads
-
-    a = np.square(np.sin(d_lat * 0.5)) + np.cos(target_X_rads) * np.cos(np.radians(rand_coords[:,0])) * np.square(np.sin(d_lon * 0.5))
-
-    great_circle_distance = 2 * np.arcsin(np.minimum(np.square(a), np.repeat(1, len(a))))
-
-    d = EARTH_EQUATORIAL_RADIUS_MI * great_circle_distance
-
-    return np.min(d)
 
 
 def to_value_array(arr_obj):

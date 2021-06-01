@@ -3,10 +3,14 @@ Summary: Constants for various geodata measures
 """
 
 # Earth
-EARTH_EQUATORIAL_RADIUS_KM: float = 6378.137
-EARTH_POLAR_RADIUS_KM: float = 6356.752
-EARTH_VOLUMETRIC_MEAN_RADIUS_KM: float = 6371.000
-EARTH_CORE_RADIUS_KM: float = 3485.000
+EARTH_EQUATORIAL_RADIUS_M: float = 6378137.000000
+EARTH_EQUATORIAL_RADIUS_KM: float = 6378.137000
+
+EARTH_POLAR_RADIUS_M: float = 6356752.314245
+EARTH_POLAR_RADIUS_KM: float = 6356.752000
+
+EARTH_VOLUMETRIC_MEAN_RADIUS_KM: float = 6371.000000
+EARTH_CORE_RADIUS_KM: float = 3485.000000
 
 
 # Distance
@@ -34,5 +38,6 @@ ARCSECOND: float = 1 / (DEGREE * DEGREE)
 
 
 
-# Earth data source - 
+# Earth data sources - 
 # https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
+# https://en.wikipedia.org/wiki/World_Geodetic_System

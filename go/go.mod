@@ -1,3 +1,3 @@
-module github.com/MarkMoretto/geospatial
+module GeGoSpatial
 
 go 1.16
