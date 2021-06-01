@@ -6,3 +6,5 @@ __pycache__/
 
 .vscode/
 dev[_-]*
+
+examples/geopandas_from_pandas.py
