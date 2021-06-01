@@ -7,5 +7,4 @@ __pycache__/
 .vscode/
 dev[_-]*
 
-/examples/geopandas*pandas.py
-!examples/data/*
+/examples/**
