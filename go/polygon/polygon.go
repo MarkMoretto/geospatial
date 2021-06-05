@@ -13,7 +13,8 @@ var Centroid = pt.Point{X: 0.0, Y: 0.0}
 
 // Count of vertices within a given polygon.
 func (pg *Polygon) VertexCount() (result int){
-	result = len(*pg) / (*pg)[0].Size()
+	// result = len(*pg) / (*pg)[0].Size()
+	result = len(*pg) - 1
 	return
 }
 
@@ -31,7 +32,8 @@ func (p *Polygon) CalculateCentroid() {
 	// minus 2.  We're going minus 2 since we're including
 	// the next element of the polygon and will finlize
 	// calculations outside of the loop.
-	for i < cap(*p) - 2 {
+	// for i < cap(*p) - 2 {
+	for i < p.VertexCount() - 1 {
 		x0 := (*p)[i].X
 		x1 := (*p)[ii].X
 		y0 := (*p)[i].Y

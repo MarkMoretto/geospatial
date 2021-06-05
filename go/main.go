@@ -24,9 +24,18 @@ func main() {
 		{X:0, Y: 77},
 	}	
 
+	var hexagonPolygon = &p.Polygon{
+		{X:10, Y: 0},
+		{X:0, Y: 10},
+		{X:10, Y: 20},
+		{X:20, Y: 20},		
+		{X:30, Y: 10},
+		{X:20, Y: 0},
+	}		
 
 	RunPolygonTest(squarePolygon, "Square")
 	RunPolygonTest(pentagonPolygon, "Pentagon")
+	RunPolygonTest(hexagonPolygon, "Hexagon")
 
 }
 
