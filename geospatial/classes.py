@@ -2,10 +2,21 @@
 
 from numpy import array, float32
 
+
+class Point:
+    """Structure to represent a basic Cartesian point."""
+    X: float
+    y: float
+    def __init__(self, X, y):
+        self.X = X
+        self.y = y
+        
+
 class CordPoint:
     """Simple structure to represent a coordinate point."""
     lat: float
     lon: float
+
 
 class Coord(CordPoint):
     __slots__ = ["latitude", "longitude", "scale"]
