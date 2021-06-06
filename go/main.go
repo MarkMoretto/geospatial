@@ -10,27 +10,27 @@ func main() {
 	/////////
 	//! Test shapes
 	var squarePolygon = &p.Polygon{
-		{X:0, Y: 0},
-		{X:10, Y: 0},
-		{X:10, Y: 10},
-		{X:0, Y: 10},		
+		{X: 0.00, Y: 0.00},
+		{X: 10.00, Y: 0.00},
+		{X: 10.00, Y: 10.00},
+		{X: 0.00, Y: 10.00},		
 	}
 
 	var pentagonPolygon = &p.Polygon{
-		{X:100, Y: 0},
-		{X:200, Y: 77},
-		{X:160, Y: 200},
-		{X:40, Y: 200},		
-		{X:0, Y: 77},
+		{X: 10.00, Y: 0.00},
+		{X: 3.09, Y: 9.51},
+		{X: -8.09, Y: 5.88},
+		{X: -8.09, Y: -5.88},
+		{X: 3.09, Y: -9.51},
 	}	
 
 	var hexagonPolygon = &p.Polygon{
-		{X:10, Y: 0},
-		{X:0, Y: 10},
-		{X:10, Y: 20},
-		{X:20, Y: 20},		
-		{X:30, Y: 10},
-		{X:20, Y: 0},
+		{X:10.00, Y: 0.00},
+		{X:0.00, Y: 10.00},
+		{X:10.00, Y: 20.00},
+		{X:20.00, Y: 20.00},
+		{X:30.00, Y: 10.00},
+		{X:20.00, Y: 0.00},
 	}		
 
 	RunPolygonTest(squarePolygon, "Square")
@@ -42,7 +42,7 @@ func main() {
 
 //! Print results to console.
 func RunPolygonTest(pg *p.Polygon, shapeName string) {
-	fmt.Println("Finding centroid for a ", shapeName)
+	fmt.Println("\nFinding centroid for a ", shapeName)
 
 	fmt.Printf("The polygon length is: %d\n", len(*pg))
 	fmt.Printf("The polygon capacity is: %d\n", cap(*pg))

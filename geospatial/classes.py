@@ -7,9 +7,19 @@ class Point:
     """Structure to represent a basic Cartesian point."""
     X: float
     y: float
-    def __init__(self, X, y):
+    def __init__(self, X: float, y: float) -> None:
         self.X = X
         self.y = y
+
+    def __str__(self):
+        return f"<Point ({self.X}, {self.y}) />"
+        
+    def __repr__(self):
+        return f"({self.X}, {self.y})"
+
+    @property
+    def Xy(self):
+        return self.X, self.y
         
 
 class CordPoint:

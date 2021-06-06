@@ -7,44 +7,51 @@ import (
 // Polygon is a collection of coordinates.
 type Polygon []pt.Point
 
-var Area float32 = 0.0
-var SignedArea float32 = 0.0
-var Centroid = pt.Point{X: 0.0, Y: 0.0}
+var Area float32
+var SignedArea float32
+// var Centroid = pt.Point{X: 0.0, Y: 0.0}
+var Centroid pt.Point
+
 
 // Count of vertices within a given polygon.
-func (pg *Polygon) VertexCount() (result int){
+func (pg *Polygon) VertexCount() (result uint32){
 	// result = len(*pg) / (*pg)[0].Size()
-	result = len(*pg) - 1
+	result = uint32(len(*pg))
 	return
 }
 
 
 func (p *Polygon) CalculateCentroid() {
+
 	pCentroid := &Centroid
 	pArea := &Area
 	pSignedArea := &SignedArea
 
+	*pCentroid = pt.Point{X: 0.0, Y: 0.0}
+	*pArea = 0
+	*pSignedArea = 0
+
 	// Counters
-	var i int = 0
-	var ii int = 1
+	var i uint32 = 0
+	var ii uint32 = 1
 
 	// Vertices == capacity or length of polygon
 	// minus 2.  We're going minus 2 since we're including
 	// the next element of the polygon and will finlize
 	// calculations outside of the loop.
 	// for i < cap(*p) - 2 {
-	for i < p.VertexCount() - 1 {
+	for i < p.VertexCount() - 2 {
 		x0 := (*p)[i].X
 		x1 := (*p)[ii].X
 		y0 := (*p)[i].Y
 		y1 := (*p)[ii].Y
-
+		
 		*pArea = (x0 * y1) - (x1 * y0)
 
 		*pSignedArea = *pSignedArea + Area
 
-		(*pCentroid).X = (*pCentroid).X + ((x0 + x1) * Area)
-		(*pCentroid).Y = (*pCentroid).Y + ((y0 + y1) * Area)
+		(*pCentroid).X = (*pCentroid).X + ((x0 + x1) * *pArea)
+		(*pCentroid).Y = (*pCentroid).Y + ((y0 + y1) * *pArea)	
 
 		i++
 		ii++
@@ -58,13 +65,13 @@ func (p *Polygon) CalculateCentroid() {
 
 	*pArea = (x0 * y1) - (x1 * y0)
 
-	*pSignedArea = *pSignedArea + Area
+	*pSignedArea = *pSignedArea + *pArea
 
-	(*pCentroid).X = (*pCentroid).X + ((x0 + x1) * Area)
-	(*pCentroid).Y = (*pCentroid).Y + ((y0 + y1) * Area)
+	(*pCentroid).X = (*pCentroid).X + ((x0 + x1) * *pArea)
+	(*pCentroid).Y = (*pCentroid).Y + ((y0 + y1) * *pArea)	
 
 	// Half of signed area
-	*pSignedArea *= 0.5
-	(*pCentroid).X = (*pCentroid).X / (6.0 * SignedArea)
-	(*pCentroid).Y = (*pCentroid).Y / (6.0 * SignedArea)
+	*pSignedArea = *pSignedArea * 0.5
+	(*pCentroid).X = (*pCentroid).X / (6.0 * *pSignedArea)
+	(*pCentroid).Y = (*pCentroid).Y / (6.0 * *pSignedArea)
 }
