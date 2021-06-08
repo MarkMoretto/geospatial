@@ -39,7 +39,6 @@ func (p *Polygon) CalculateCentroid() {
 	// minus 2.  We're going minus 2 since we're including
 	// the next element of the polygon and will finlize
 	// calculations outside of the loop.
-	// for i < cap(*p) - 2 {
 	for i < p.VertexCount() - 2 {
 		x0 := (*p)[i].X
 		x1 := (*p)[ii].X
