@@ -1,27 +1,5 @@
 package shapes
 
-/*
-def regular_pentagon(origin: Point = Point(0., 0.), scale: int = 10) -> List[Point]:
-    output: List[Point] = []
-
-    round_to: int = 1
-
-    c1 = round(cos((2*pi)/5) * scale, round_to)
-    c2 = round(cos(pi/5) * scale, round_to)
-    s1 = round(sin((2*pi)/5) * scale, round_to)
-    s2 = round(sin(pi/5) * scale, round_to)
-
-
-    p1 = Point(origin.X + 1. * scale, origin.y + 0. * scale)
-    p2 = Point(origin.X + c1, origin.y + s1)
-    p3 = Point(origin.X - c2, origin.y + s2)
-    p4 = Point(origin.X - c2, origin.y - s2)
-    p5 = Point(origin.X + c1, origin.y - s1)
-    output.extend([p1, p2, p3, p4, p5])
-
-    return output
-*/
-
 import (
 	pg "GeGoSpatial/polygon"
 	pt "GeGoSpatial/polygon/point"
@@ -38,7 +16,7 @@ const (
 	TwoPi float64 = math.Pi * 2
 )
 
-
+// Regular Pentagon interface.
 type RegularPentagon interface{
 	P1(o *Origin)
 	P2(o *Origin)
